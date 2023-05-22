@@ -1,0 +1,8 @@
+@import "../../scss/defaults.scss";
+.shop-footer{
+     text-align: center;
+     padding: 24px;
+     color: $white;
+     background: linear-gradient(-45deg, $primary, $secondary);
+     p{font-size: 18px;}
+}

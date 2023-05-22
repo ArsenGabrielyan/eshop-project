@@ -1,0 +1,18 @@
+@import "./scss/defaults.scss";
+.products-container{
+     display: flex;
+     @include flex-align(center,center);
+     flex-direction: column;
+     min-height: 100vh;
+     h2{
+          margin: 10px 0;
+          font-size: 32px;
+          font-weight: 300;
+          border-bottom: 2px solid $primary;
+     }
+     .product-list{
+          display: flex;
+          @include flex-align(center,center);
+          flex-wrap: wrap;
+     }
+}
