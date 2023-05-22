@@ -8,17 +8,36 @@
           display: flex;
           @include flex-align(center,center);
           flex-direction: column;
-          h3{font-size: 21px;font-weight: 350;margin: 10px 0;width: 250px;text-align: center;}
+          h3{font-size: 21px;font-weight: 350;margin: 5px 0;width: 250px;text-align: center;}
+          p{font-size: 21px;margin-bottom: 10px;}
           .details{
                width: 100%;
                display: flex;
                @include flex-align(space-between,center);
-               p{font-size: 21px;}
+               .txt-center{width: 100%;p{text-align: center}}
                button{
                     @include btn($secondary,$white);
                     font-size: 16.5px;
                     span{padding: 0 0.25em;}
                }
+               input[type=number]{
+                    padding: 7px;
+                    text-align: center;
+                    font-size: 20px;
+                    width: 95px;
+                    border: 2px solid $secondary;
+                    color: $secondary;
+                    border-radius: 10px;
+               }
+          }
+          .qty{
+               padding: 7px;
+               text-align: center;
+               font-size: 20px;
+               width: 95px;
+               border: 2px solid $secondary;
+               color: $secondary;
+               border-radius: 10px;
           }
      }
 }

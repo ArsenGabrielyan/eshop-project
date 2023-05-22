@@ -9,4 +9,6 @@ export class ProductCardComponent {
   @Input() prodImg="";
   @Input() prodTitle="";
   @Input() price=0;
+  @Input() noBtn=false;
+  @Input() qty=0
 }

@@ -13,6 +13,7 @@ export class AppComponent {
   selectedSortOpt = "Sort By";
   searchPrompt="";
   enableClearBtn = false;
+  selectedPage=localStorage.getItem("currPage") || "all";
   private compare(a:IProduct,b:IProduct,type:string="",mode:string=""){
     switch(mode){
       case "des":
@@ -28,6 +29,10 @@ export class AppComponent {
         default: return (a.image>b.image) ? 1 : (a.image<b.image) ? -1 : 0
       }
     }
+  }
+  changePage(page:string){
+    this.selectedPage=page;
+    localStorage.setItem("currPage",page)
   }
   handleChangeOptions(){
     switch(this.selectedSortOpt){

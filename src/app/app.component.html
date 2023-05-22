@@ -6,9 +6,10 @@
           <input type="text" name="search" id="search" [placeholder]="searchPlaceholder" [(ngModel)]="searchPrompt" (input)="handleInput()">
           <button type="button" *ngIf="enableClearBtn" (click)="clearSearch()"><span class="material-symbols-outlined">close</span></button>
      </div>
-     <button type="button"><span class="material-symbols-outlined">shopping_cart</span></button>
+     <button type="button" *ngIf="selectedPage==='all'" (click)="changePage('checkout')"><span class="material-symbols-outlined">shopping_cart</span></button>
+     <button type="button" *ngIf="selectedPage==='checkout'" (click)="changePage('all')"><span class="material-symbols-outlined">arrow_back</span></button>
 </header>
-<section class="products-container">
+<section class="products-container" *ngIf="selectedPage==='all'">
      <h2>All Products</h2>
      <select name="sort" id="sort" (change)="handleChangeOptions()" [(ngModel)]="selectedSortOpt">
           <option selected disabled>Sort By</option>
@@ -20,6 +21,16 @@
      </select>
      <div class="product-list">
           <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price"></product-card>
+     </div>
+</section>
+<section class="products-container" *ngIf="selectedPage==='checkout'">
+     <h2>Product In Cart</h2>
+     <div class="cart-details">
+          <h3>Total: $100</h3>
+          <button class="checkout"><span class="material-symbols-outlined">shopping_cart_checkout</span> To Checkout</button>
+     </div>
+     <div class="product-list">
+          <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price" [noBtn]="true"></product-card>
      </div>
 </section>
 <app-footer></app-footer>
