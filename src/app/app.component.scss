@@ -1,4 +1,7 @@
 @import "./scss/defaults.scss";
+body{
+     position: relative;
+}
 .shop-header{
      display: flex;
      @include flex-align(space-between, center);

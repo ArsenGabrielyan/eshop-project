@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { SearchPipePipe } from './pipe/search-pipe.pipe';
+import { AlertboxComponent } from './components/alertbox/alertbox.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SearchPipePipe } from './pipe/search-pipe.pipe';
     FooterComponent,
     ProductCardComponent,
     SearchPipePipe,
+    AlertboxComponent,
   ],
   imports: [
     BrowserModule,
