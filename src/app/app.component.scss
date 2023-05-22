@@ -1,18 +1,60 @@
 @import "./scss/defaults.scss";
+.shop-header{
+     display: flex;
+     @include flex-align(space-between, center);
+     padding: 15px;
+     background: linear-gradient(-45deg, $primary, $secondary);
+     color: $white;
+     .logo h1{font-weight: 300;}
+     .search{
+          display: flex;
+          @include flex-align(center,center);
+          width: 50%;
+          input{
+               padding: 0.5em 1em;
+               border-radius: 10px;
+               border: 2px solid $white;
+               outline: none;background: none;
+               width: 100%;
+               color: $white;
+               font-size: 16.5px;
+               transition: .3s;
+               &::placeholder{color: $grey;}
+               &:focus{border-color: $primary;}
+          }
+          button{@include btn($white,$primary)}
+     }
+     button{@include btn($white,$primary)}
+}
 .products-container{
      display: flex;
-     @include flex-align(center,center);
+     @include flex-align(flex-start,center);
      flex-direction: column;
      min-height: 100vh;
      h2{
           margin: 10px 0;
-          font-size: 32px;
-          font-weight: 300;
+          font-size: 32px;font-weight: 300;
           border-bottom: 2px solid $primary;
      }
      .product-list{
-          display: flex;
+          display: flex;flex-wrap: wrap;
           @include flex-align(center,center);
-          flex-wrap: wrap;
+     }
+     #sort{
+          padding: 5px;
+          font-size: 16px;
+          color: $primary;
+          border: 2px solid $primary;
+          background: none;
+          outline: none;
+          border-radius: 10px;
+          cursor: pointer;
+          option{color: $secondary;&:disabled{color: grey;}}
+     }
+}
+@media (prefers-reduced-motion: reduce){
+     .shop-header {
+          .search {button, input{transition: none;}}
+          button{transition: none;}
      }
 }

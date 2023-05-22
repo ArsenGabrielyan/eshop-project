@@ -1,8 +1,25 @@
-<app-header></app-header>
+<header class="shop-header">
+     <div class="logo">
+          <h1>e-shop</h1>
+     </div>
+     <div class="search">
+          <input type="text" name="search" id="search" [placeholder]="searchPlaceholder" [(ngModel)]="searchPrompt" (input)="handleInput()">
+          <button type="button" *ngIf="enableClearBtn" (click)="clearSearch()"><span class="material-symbols-outlined">close</span></button>
+     </div>
+     <button type="button"><span class="material-symbols-outlined">shopping_cart</span></button>
+</header>
 <section class="products-container">
      <h2>All Products</h2>
+     <select name="sort" id="sort" (change)="handleChangeOptions()" [(ngModel)]="selectedSortOpt">
+          <option selected disabled>Sort By</option>
+          <option value="name">Name</option>
+          <option value="nameDes">Name (Descending)</option>
+          <option value="price">Price (From Cheapest)</option>
+          <option value="priceDes">Price (From The Most Expensive)</option>
+          <option value="default">Default</option>
+     </select>
      <div class="product-list">
-          <product-card prodImg="assets/images/airpods.jpg" prodTitle="Airpods" [price]="50"></product-card>
+          <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price"></product-card>
      </div>
 </section>
 <app-footer></app-footer>
