@@ -1,4 +1,4 @@
-<!-- <app-alertbox></app-alertbox> -->
+<!-- <app-alertbox msg="Completed"></app-alertbox> -->
 <header class="shop-header">
      <div class="logo">
           <h1>e-shop</h1>
@@ -14,14 +14,10 @@
      <h2>All Products</h2>
      <select name="sort" id="sort" (change)="handleChangeOptions()" [(ngModel)]="selectedSortOpt">
           <option selected disabled>Sort By</option>
-          <option value="name">Name</option>
-          <option value="nameDes">Name (Descending)</option>
-          <option value="price">Price (From Cheapest)</option>
-          <option value="priceDes">Price (From The Most Expensive)</option>
-          <option value="default">Default</option>
+          <option *ngFor="let opt of optionList" [value]="opt.value">{{opt.name}}</option>
      </select>
      <div class="product-list">
-          <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price"></product-card>
+          <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price" [qty]="prod.qty" [category]="prod.category"></product-card>
      </div>
 </section>
 <section class="products-container" *ngIf="selectedPage==='checkout'">

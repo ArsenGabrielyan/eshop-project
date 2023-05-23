@@ -10,5 +10,6 @@ export class ProductCardComponent {
   @Input() prodTitle="";
   @Input() price=0;
   @Input() noBtn=false;
-  @Input() qty=0
+  @Input() qty=0;
+  @Input() category="";
 }

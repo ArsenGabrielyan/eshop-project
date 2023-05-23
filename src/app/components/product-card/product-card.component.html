@@ -4,7 +4,8 @@
      </div>
      <div class="product-info">
           <h3>{{prodTitle}}</h3>
-          <p>${{price}}</p>
+          <p class="category">{{category | titlecase}}</p>
+          <p>{{price | currency}}</p>
           <div class="details" *ngIf="!noBtn">
                <input type="number" class="qty" name="number" [ngModel]="qty" [min]="0">
                <button><span class="material-symbols-outlined">add_shopping_cart</span>Add to Cart</button>

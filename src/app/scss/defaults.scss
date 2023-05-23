@@ -2,6 +2,7 @@ $primary: #0090ff !default;
 $secondary: #002a4f !default;
 $white: #fafafa !default;
 $grey: #e0e0e0 !default;
+$darkgrey: #666 !default;
 @mixin flex-align($j,$a){justify-content: $j;align-items: $a;}
 @mixin btn($c1, $c2){
      display: flex;
