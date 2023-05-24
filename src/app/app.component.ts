@@ -13,8 +13,10 @@ export class AppComponent {
   searchPlaceholder = searchHint;
   selectedSortOpt = "Sort By";
   searchPrompt="";
-  enableClearBtn = false;
   selectedPage=localStorage.getItem("currPage") || "all";
+  alertMsg=""
+  showAlert=false;
+  enableClearBtn = false;
   private compare(a:IProduct,b:IProduct,type:string="",mode:string=""){
     switch(mode){
       case "des":
@@ -54,5 +56,14 @@ export class AppComponent {
   }
   clearSearch(){
     this.searchPrompt = "";
+  }
+  addToCart(i:number){
+    console.log(i);
+    this.showAlert=true;
+    this.alertMsg = `Added ${this.prodList[i].name} to the Card`
+    setTimeout(()=>{
+      this.showAlert=false;
+      this.alertMsg = "";
+    },1500)
   }
 }

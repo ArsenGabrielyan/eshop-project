@@ -1,8 +1,6 @@
-<!-- <app-alertbox msg="Completed"></app-alertbox> -->
+<app-alertbox [msg]="alertMsg" *ngIf="showAlert"></app-alertbox>
 <header class="shop-header">
-     <div class="logo">
-          <h1>e-shop</h1>
-     </div>
+     <div class="logo"><h1>e-shop</h1></div>
      <div class="search">
           <input type="text" name="search" id="search" [placeholder]="searchPlaceholder" [(ngModel)]="searchPrompt" (input)="handleInput()">
           <button type="button" *ngIf="enableClearBtn" (click)="clearSearch()"><span class="material-symbols-outlined">close</span></button>
@@ -17,7 +15,18 @@
           <option *ngFor="let opt of optionList" [value]="opt.value">{{opt.name}}</option>
      </select>
      <div class="product-list">
-          <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price" [qty]="prod.qty" [category]="prod.category"></product-card>
+          <div class="product-card" *ngFor="let prod of prodList;index as i">
+               <div class="product-img"><img [src]="prod.image" alt="product" width="250" height="250"></div>
+               <div class="product-info">
+                    <h3>{{prod.name}}</h3>
+                    <p class="category">{{prod.category | titlecase}}</p>
+                    <p>{{prod.price | currency}}</p>
+                    <div class="details">
+                         <input type="number" class="qty" name="number" [ngModel]="prod.qty" [min]="0">
+                         <button (click)="addToCart(i)"><span class="material-symbols-outlined">add_shopping_cart</span>Add to Cart</button>
+                    </div>
+               </div>
+          </div>
      </div>
 </section>
 <section class="products-container" *ngIf="selectedPage==='checkout'">
@@ -27,7 +36,15 @@
           <button class="checkout"><span class="material-symbols-outlined">shopping_cart_checkout</span> To Checkout</button>
      </div>
      <div class="product-list">
-          <product-card *ngFor="let prod of prodList|searchPipe:searchPrompt; let i=index" [id]="i" [prodImg]="prod.image" [prodTitle]="prod.name | titlecase" [price]="prod.price" [noBtn]="true"></product-card>
+          <div class="product-card" *ngFor="let prod of prodList">
+               <div class="product-img"><img [src]="prod.image" alt="product" width="250" height="250"></div>
+               <div class="product-info">
+                    <h3>{{prod.name}}</h3>
+                    <p class="category">{{prod.category | titlecase}}</p>
+                    <p>{{prod.price | currency}}</p>
+                    <input type="number" class="qty" name="number" [ngModel]="prod.qty" [min]="0">
+               </div>
+          </div>
      </div>
 </section>
 <app-footer></app-footer>
