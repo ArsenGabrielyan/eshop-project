@@ -16,13 +16,17 @@
      </select>
      <div class="product-list">
           <div class="product-card" *ngFor="let prod of prodList;index as i">
-               <div class="product-img"><img [src]="prod.image" alt="product" width="250" height="250"></div>
+               <div class="product-img"><img [src]="prod.image" alt="product" width="270" height="270"></div>
                <div class="product-info">
                     <h3>{{prod.name}}</h3>
                     <p class="category">{{prod.category | titlecase}}</p>
                     <p>{{prod.price | currency}}</p>
                     <div class="details">
-                         <input type="number" class="qty" name="number" [ngModel]="prod.qty" [min]="0">
+                         <div class="inputNum">
+                              <button class="numBtn" (click)="increaseQty(i,'current')"><span class="material-symbols-outlined">add</span></button>
+                              <input type="number" name="qty" [ngModel]="prod.qty" (change)="changeQty(i,$event,'current')" [min]="1">
+                              <button class="numBtn" (click)="decreaseQty(i,'current')"><span class="material-symbols-outlined">remove</span></button>
+                         </div>
                          <button (click)="addToCart(i)"><span class="material-symbols-outlined">add_shopping_cart</span>Add to Cart</button>
                     </div>
                </div>
@@ -32,17 +36,22 @@
 <section class="products-container" *ngIf="selectedPage==='checkout'">
      <h2>Product In Cart</h2>
      <div class="cart-details">
-          <h3>Total: $100</h3>
+          <h3>Total: {{totalPrice | currency}}</h3>
           <button class="checkout"><span class="material-symbols-outlined">shopping_cart_checkout</span> To Checkout</button>
      </div>
      <div class="product-list">
-          <div class="product-card" *ngFor="let prod of prodList">
+          <div class="product-card" *ngFor="let prod of prodOnCart;index as i">
                <div class="product-img"><img [src]="prod.image" alt="product" width="250" height="250"></div>
                <div class="product-info">
                     <h3>{{prod.name}}</h3>
                     <p class="category">{{prod.category | titlecase}}</p>
                     <p>{{prod.price | currency}}</p>
-                    <input type="number" class="qty" name="number" [ngModel]="prod.qty" [min]="0">
+                    <div class="inputNum">
+                         <button class="numBtn" (click)="increaseQty(i)"><span class="material-symbols-outlined">add</span></button>
+                         <input type="number" name="qty" [ngModel]="prod.qty" (change)="changeQty(i,$event)" [min]="1">
+                         <button class="numBtn" (click)="decreaseQty(i)"><span class="material-symbols-outlined">remove</span></button>
+                    </div>
+                    <button (click)="removeFromCart(i)"><span class="material-symbols-outlined">remove_shopping_cart</span>Remove From Cart</button>
                </div>
           </div>
      </div>

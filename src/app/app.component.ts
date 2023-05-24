@@ -8,8 +8,6 @@ import { IProduct } from './data/interfaces/product';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  prodList = products.sort((a,b)=>this.compare(a,b));
-  optionList = options;
   searchPlaceholder = searchHint;
   selectedSortOpt = "Sort By";
   searchPrompt="";
@@ -17,6 +15,11 @@ export class AppComponent {
   alertMsg=""
   showAlert=false;
   enableClearBtn = false;
+  totalPrice = 0;
+  alertTimer!:NodeJS.Timeout;
+  prodList = products.sort((a,b)=>this.compare(a,b));
+  prodOnCart:IProduct[] = [];
+  optionList = options;
   private compare(a:IProduct,b:IProduct,type:string="",mode:string=""){
     switch(mode){
       case "des":
@@ -53,17 +56,60 @@ export class AppComponent {
   handleInput(){
     if(this.searchPrompt!=="") this.enableClearBtn = true;
     else this.enableClearBtn = false;
+    this.prodList=this.prodList.filter(val=>val.name.toLowerCase().includes(this.searchPrompt.toLowerCase())||val.category.toLowerCase().includes(this.searchPrompt.toLowerCase()))
   }
   clearSearch(){
     this.searchPrompt = "";
   }
   addToCart(i:number){
-    console.log(i);
+    clearTimeout(this.alertTimer);
+    const {name, image, category, price, qty} = this.prodList[i]
     this.showAlert=true;
-    this.alertMsg = `Added ${this.prodList[i].name} to the Card`
-    setTimeout(()=>{
+    this.alertMsg = `Added ${name} to the Card`;
+    const chosenProduct: IProduct = {
+      name: name,
+      category: category,
+      price: price,
+      image: image,
+      qty: !qty ? 1 : qty
+    };
+    this.prodOnCart.push(chosenProduct);
+    this.totalPrice+=!qty ? price : price*qty;
+    this.alertTimer = setTimeout(()=>{
       this.showAlert=false;
       this.alertMsg = "";
-    },1500)
+    },1000);
+    console.log(this.prodList[i])
+  };
+  changeQty(i:number,e:Event,type:string=""){
+    const elem = e.target as HTMLInputElement;
+    const {price} = this.prodOnCart[i];
+    if(type==="current") {
+      this.prodList[i].qty = elem.valueAsNumber;
+    } else {
+      this.totalPrice=price*elem.valueAsNumber;
+      this.prodOnCart[i].qty = elem.valueAsNumber;
+    }
+  }
+  increaseQty(i:number,type:string=""){
+    if(type==="current"){
+      this.prodList[i].qty>=1 ? this.prodList[i].qty++ : 1;
+    } else {
+      this.prodOnCart[i].qty>=1 ? this.prodOnCart[i].qty++ : 1;
+      this.totalPrice=this.prodOnCart[i].price*this.prodOnCart[i].qty;
+    }
+  }
+  decreaseQty(i:number,type:string=""){
+    if(type==="current"){
+      this.prodList[i].qty>1 ? this.prodList[i].qty-- : 1;
+    } else {
+      this.prodOnCart[i].qty>1 ? this.prodOnCart[i].qty-- : 1;
+      this.totalPrice=this.prodOnCart[i].price*this.prodOnCart[i].qty;
+    }
+  }
+  removeFromCart(i:number){
+    const {price,qty} = this.prodOnCart[i]
+    this.totalPrice-=price*qty;
+    this.prodOnCart.splice(i,1);
   }
 }
