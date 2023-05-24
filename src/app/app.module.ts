@@ -5,6 +5,9 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
 import { AlertboxComponent } from './components/alertbox/alertbox.component';
+import { NgxsModule } from '@ngxs/store';
+import { ShopState } from './store/product.state';
+import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,9 @@ import { AlertboxComponent } from './components/alertbox/alertbox.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    NgxsModule.forRoot([ShopState],{selectorOptions: { suppressErrors: true}}),
+    NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
