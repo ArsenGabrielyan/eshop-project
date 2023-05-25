@@ -1,5 +1,3 @@
-import { IProduct } from "../data/interfaces/product";
-
 export namespace ShopActions{
      export class AddToCart{
           static readonly type = "[e-Shop: Add to Cart]";
@@ -25,12 +23,15 @@ export namespace ShopActions{
           static readonly type = "[e-Shop: Change Sort Option]";
           constructor(public selectedOpt: string){}
      }
-     export class SearchProduct{
-          static readonly type = "[e-Shop: Search Product]";
-          constructor(public query:string){}
+     export class UpdateSearch{
+          static readonly type = "[e-Shop: Update Search]";
+          constructor(public query: string){}
+     }
+     export class ApplySearch{
+          static readonly type = "[e-Shop: Apply Search]";
      }
      export class ClearSearch{
           static readonly type = "[e-Shop: Clear Search]";
-          constructor(public query:string){}
+          constructor(public query: string){}
      }
 }

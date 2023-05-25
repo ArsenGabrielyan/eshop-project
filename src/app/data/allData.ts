@@ -35,23 +35,23 @@ export const options: IOption[] = [
      {value:"priceDes",name:"Price (From The Most Expensive)"},
      {value:"default",name:"Default"},
 ]
-const categories: string[] = ["Cars", "Baby Products", "Beauty", "Books", "Camera", "Phone", "Phone Accessories", "Electronics", "Grocery & Foods", "Health and Personal Care", "Home and Garden", "Industrial and Scientific", "Music", "DVD", "CD", "Musical instruments", "Office Products", "Outdoors", "Computers", "Pet Supplies", "Software", "Sports", "Tools & Improvement", "Toys and Games", "Video", "Blu-ray", "Video Games", "Watches", "Game Consoles", "Entertainment Collectibles", "Clothing", "Shoes", "Retro Collectibles", "Souvenirs"];
+const categories: string[] = ["Cars", "Baby Products", "Beauty", "Books", "Camera", "Phone", "Phone Accessories", "Electronics", "Grocery & Foods", "Health and Personal Care", "Home and Garden", "Industrial and Scientific", "Music", "DVD", "CD", "Musical instruments", "Office Products", "Outdoors", "Computers", "Pet Supplies", "Software", "Sports", "Tools & Improvement", "Toys and Games", "Video", "Blu-ray", "Video Games", "Watches", "Game Consoles", "Entertainment Collectibles", "Clothing", "Shoes", "Retro Collectibles", "Souvenirs", "Tech and Gadgets"];
 export const searchHint = `Search (e.g. ${categories[Math.floor(Math.random()*categories.length)]})`;
 export function compare(a:IProduct,b:IProduct,type:string="",mode:string=""){
-     switch(mode){
-       case "des":
-       switch(type){
-         case "name": return (a.name>b.name) ? -1 : (a.name<b.name) ? 1 : 0
-         case "price": return (a.price>b.price) ? -1 : (a.price<b.price) ? 1 : 0
-         case "category": return (a.category>b.category) ? -1 : (a.category<b.category) ? 1 : 0
-         default: return (a.image>b.image) ? -1 : (a.image<b.image) ? 1 : 0
-       }
-       default:
-       switch(type){
-         case "name": return (a.name>b.name) ? 1 : (a.name<b.name) ? -1 : 0
-         case "price": return (a.price>b.price) ? 1 : (a.price<b.price) ? -1 : 0
-         case "category": return (a.category>b.category) ? 1 : (a.category<b.category) ? -1 : 0
-         default: return (a.image>b.image) ? 1 : (a.image<b.image) ? -1 : 0
-       }
-     }
-   }
+  switch(mode){
+    case "des":
+    switch(type){
+      case "name": return (a.name>b.name) ? -1 : (a.name<b.name) ? 1 : 0
+      case "price": return (a.price>b.price) ? -1 : (a.price<b.price) ? 1 : 0
+      case "category": return (a.category>b.category) ? -1 : (a.category<b.category) ? 1 : 0
+      default: return (a.image>b.image) ? -1 : (a.image<b.image) ? 1 : 0
+    }
+    default:
+    switch(type){
+      case "name": return (a.name>b.name) ? 1 : (a.name<b.name) ? -1 : 0
+      case "price": return (a.price>b.price) ? 1 : (a.price<b.price) ? -1 : 0
+      case "category": return (a.category>b.category) ? 1 : (a.category<b.category) ? -1 : 0
+      default: return (a.image>b.image) ? 1 : (a.image<b.image) ? -1 : 0
+    }
+  }
+}

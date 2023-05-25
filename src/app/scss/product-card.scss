@@ -12,15 +12,13 @@
           p{font-size: 32px;margin-bottom: 10px;}
           .category{font-size: 16.5px;color: $darkgrey;margin-top: 2px;font-style: italic;margin-bottom: 0;}
           .details{
-               width: 100%;
-               display: flex;
+               width: 100%;display: flex;
                @include flex-align(space-between,center);
                .txt-center{width: 100%;p{text-align: center}}
                button{
                     @include btn($secondary,$white);
-                    font-size: 16.5px;
+                    font-size: 16.5px;margin: 0;
                     span{padding: 0 0.25em;}
-                    margin: 0;
                }
           }
           .inputNum{
@@ -28,31 +26,23 @@
                @include flex-align(center,center);
                margin-right: 10px;
                .numBtn{
-                    padding: 2px;
-                    margin: 0 2px;
-                    span{padding: 0;}
-                    border: none;
+                    padding: 2px;margin: 0 2px;
+                    border: none;span{padding: 0;}
                }
           }
           input[type=number]{
                padding: 5px;
                text-align: center;
-               font-size: 21px;
-               width: 50px;
+               font-size: 21px;width: 50px;
                border: 2px solid $secondary;
                color: $secondary;
                border-radius: 10px;
                &::-webkit-inner-spin-button,
-               &::-webkit-outer-spin-button{
-                    appearance: none;
-                    -webkit-appearance: none;
-                    margin: 0;
-               }
+               &::-webkit-outer-spin-button{appearance: none;-webkit-appearance: none;margin: 0;}
           }
           button{
                @include btn($secondary,$white);
-               font-size: 16.5px;
-               margin-top: 10px;
+               font-size: 16.5px;margin-top: 10px;
                span{padding: 0 0.25em;}
           }
      }

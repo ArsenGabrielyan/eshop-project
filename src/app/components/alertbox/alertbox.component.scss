@@ -1,11 +1,9 @@
 @import "../../scss/defaults.scss";
 .alertbox{
-     position: fixed;
-     top: 0;
+     position: fixed;top: 0;
      background: #82ce81ee;
      color: #204829;
-     width: 100%;
-     display: flex;
+     width: 100%;display: flex;
      @include flex-align(center,center);
      padding: 15px;
      p{margin: 0 10px;font-size: 20px;}
