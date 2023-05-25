@@ -3,7 +3,6 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import {IProduct} from "../data/interfaces/product";
 import { ShopActions } from "./product.actions";
 import { compare, products } from "../data/allData";
-import { stat } from "fs";
 
 export interface ShopModel{
      searchTerm: string,
@@ -40,7 +39,8 @@ export class ShopState{
           };
           state.onCart.push(chosenProduct);
           state.totalPrice+=!qty ? price : price*qty;
-          ctx.setState({...state, totalPrice: state.totalPrice})
+          ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]})
+          ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.ChangeQty)
      changeQty(ctx: StateContext<ShopModel>,action: ShopActions.ChangeQty):void{
@@ -50,10 +50,11 @@ export class ShopState{
           if(action.type==="current") {
                state.all[action.index].qty = elem.valueAsNumber;
           } else {
+               state.totalPrice = price*elem.valueAsNumber;
                state.onCart[action.index].qty = elem.valueAsNumber;
           }
-          ctx.setState({...state})
-          ctx.patchState({totalPrice: price*elem.valueAsNumber})
+          ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]});
+          ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.IncreaseQty)
      increaseQty(ctx: StateContext<ShopModel>,action: ShopActions.IncreaseQty):void{
@@ -64,7 +65,8 @@ export class ShopState{
                state.onCart[action.index].qty>=1 ? state.onCart[action.index].qty++ : 1;
                state.totalPrice=state.onCart[action.index].price*state.onCart[action.index].qty;
           }
-          ctx.setState({...state, totalPrice: state.totalPrice})
+          ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]})
+          ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.DecreaseQty)
      decreaseQty(ctx: StateContext<ShopModel>,action: ShopActions.DecreaseQty):void{
@@ -75,7 +77,8 @@ export class ShopState{
                state.onCart[action.index].qty>1 ? state.onCart[action.index].qty-- : 1;
                state.totalPrice=state.onCart[action.index].price*state.onCart[action.index].qty;
           }
-          ctx.setState({...state, totalPrice: state.totalPrice})
+          ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]})
+          ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.RemoveFromCart)
      removeFromCart(ctx: StateContext<ShopModel>,action: ShopActions.RemoveFromCart):void{
@@ -83,7 +86,8 @@ export class ShopState{
           const {price,qty} = state.onCart[action.index];
           state.totalPrice-=price*qty;
           state.onCart.splice(action.index,1);
-          ctx.setState({...state})
+          ctx.setState({...state, onCart: [...state.onCart],})
+          ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.ChangeOptions)
      changeOptions(ctx: StateContext<ShopModel>, actions: ShopActions.ChangeOptions):void{
@@ -97,32 +101,23 @@ export class ShopState{
                case "catDes": state.all = products.sort((a,b)=>compare(a,b,"category","des")); break;
                default: state.all = products.sort((a,b)=>compare(a,b));
           }
-          ctx.setState({...state})
+          ctx.setState({...state, all: [...state.all]})
      } 
      @Action(ShopActions.UpdateSearch)
      updateSearch(ctx: StateContext<ShopModel>, action: ShopActions.UpdateSearch):void{
           const state = ctx.getState();
-          ctx.setState({
-               ...state,
-               searchTerm: action.query
-          })
+          ctx.setState({...state,searchTerm: action.query})
      }
      @Action(ShopActions.ApplySearch)
      applySearch(ctx: StateContext<ShopModel>):void{
           const state = ctx.getState();
           const filteredProd = state.searchTerm.toLowerCase()==="" ? products.sort((a,b)=>compare(a,b)):state.all.filter(val=>val.name.toLowerCase().includes(state.searchTerm.toLowerCase())||val.category.toLowerCase().includes(state.searchTerm.toLowerCase()));
-          ctx.setState({
-               ...state,
-               all: [...filteredProd]
-          })
+          ctx.setState({...state,all: [...filteredProd], searchTerm: state.searchTerm})
      }
      @Action(ShopActions.ClearSearch)
      clearSearch(ctx: StateContext<ShopModel>, action: ShopActions.ClearSearch):void{
           const state = ctx.getState();
-          ctx.setState({
-               ...state,
-               all: products.sort((a,b)=>compare(a,b))
-          }),
+          ctx.setState({...state,all: products.sort((a,b)=>compare(a,b))}),
           ctx.patchState({searchTerm: action.query})
      }
 }
