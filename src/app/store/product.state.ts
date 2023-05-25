@@ -90,11 +90,14 @@ export class ShopState{
      @Action(ShopActions.RemoveFromCart)
      removeFromCart(ctx: StateContext<ShopModel>,action: ShopActions.RemoveFromCart):void{
           const state = ctx.getState();
-          const {price,qty} = state.onCart[action.index];
-          state.totalPrice-=price*qty;
-          localStorage.setItem("total", String(state.totalPrice))
-          state.onCart.splice(action.index,1);
-          localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
+          const {price,qty,name} = state.onCart[action.index];
+          const perm = confirm(`Are you sure to remove ${name} from the Cart?`)
+          if(perm){
+               state.totalPrice-=price*qty;
+               localStorage.setItem("total", String(state.totalPrice))
+               state.onCart.splice(action.index,1);
+               localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
+          }
           ctx.setState({...state, onCart: [...state.onCart]})
           ctx.patchState({totalPrice: state.totalPrice})
      }
