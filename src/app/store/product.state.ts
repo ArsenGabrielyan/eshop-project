@@ -41,8 +41,7 @@ export class ShopState{
           localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
           state.totalPrice+=!qty ? price : price*qty;
           localStorage.setItem("total", String(state.totalPrice))
-          ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]})
-          ctx.patchState({totalPrice: state.totalPrice})
+          ctx.setState({...state, all: [...state.all], onCart: [...state.onCart], totalPrice: state.totalPrice})
      }
      @Action(ShopActions.ChangeQty)
      changeQty(ctx: StateContext<ShopModel>,action: ShopActions.ChangeQty):void{
@@ -96,7 +95,7 @@ export class ShopState{
           localStorage.setItem("total", String(state.totalPrice))
           state.onCart.splice(action.index,1);
           localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
-          ctx.setState({...state, onCart: [...state.onCart],})
+          ctx.setState({...state, onCart: [...state.onCart]})
           ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.ChangeOptions)
