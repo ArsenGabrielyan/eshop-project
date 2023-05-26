@@ -34,8 +34,9 @@
      </div>
 </section>
 <section class="products-container" *ngIf="selectedPage==='checkout'">
-     <h2>Product on Cart: {{!prodOnCart.length ? "None" : prodOnCart.length}}</h2>
-     <div class="cart-details">
+     <h2 *ngIf="prodOnCart.length">Product On Cart: {{prodOnCart.length}}</h2>
+     <h2 *ngIf="!prodOnCart.length">Your e-shop Cart is Empty</h2>
+     <div class="cart-details" *ngIf="prodOnCart.length">
           <h3>Total: {{totalPrice | currency}}</h3>
           <button class="checkout"><span class="material-symbols-outlined">shopping_cart_checkout</span> To Checkout</button>
           <button class="clear"><span class="material-symbols-outlined" (click)="clearCart()">clear_all</span></button>

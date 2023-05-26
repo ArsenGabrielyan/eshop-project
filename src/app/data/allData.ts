@@ -5,7 +5,7 @@ export const products: IProduct[] = [
      {name: "Airpods",category:"tech", price: 199.99, image: "assets/images/airpods.webp",qty:1,total:0},
      {name: "Home Assistant",category:"tech", price: 39.99, image: "assets/images/assistant.webp",qty:1,total:0},
      {name: "Backpack",category:"bags", price: 20, image: "assets/images/backpack.webp",qty:1,total:0},
-     {name: "Bike",category:"sports", price: 50, image: "assets/images/bike.webp",qty:1,total:0},
+     {name: "Bike",category:"sports", price: 40, image: "assets/images/bike.webp",qty:1,total:0},
      {name: "Retro Camera",category:"tech", price: 30, image: "assets/images/camera1.webp",qty:1,total:0},
      {name: "Modern Camera",category:"tech", price: 149.99, image: "assets/images/camera2.webp",qty:1,total:0},
      {name: "Off Road Car",category:"automobile", price: 500, image: "assets/images/car.webp",qty:1,total:0},
