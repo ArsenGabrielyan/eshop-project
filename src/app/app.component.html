@@ -34,7 +34,7 @@
      </div>
 </section>
 <section class="products-container" *ngIf="selectedPage==='checkout'">
-     <h2>Product In Cart</h2>
+     <h2>Product on Cart: {{!prodOnCart.length ? "None" : prodOnCart.length}}</h2>
      <div class="cart-details">
           <h3>Total: {{totalPrice | currency}}</h3>
           <button class="checkout"><span class="material-symbols-outlined">shopping_cart_checkout</span> To Checkout</button>
@@ -46,7 +46,7 @@
                     <h3>{{prod.name}}</h3>
                     <p class="category">{{prod.category | titlecase}}</p>
                     <p>{{prod.price | currency}}</p>
-                    <p class="total">Total: {{prod.total}}</p>
+                    <p class="total">Total: {{prod.total | currency}}</p>
                     <div class="inputNum">
                          <button class="numBtn" (click)="increaseQty(i)"><span class="material-symbols-outlined">add</span></button>
                          <input type="number" name="qty" [ngModel]="prod.qty" (change)="changeQty(i,$event)" [min]="1">
