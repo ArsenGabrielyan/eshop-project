@@ -1,31 +1,32 @@
 import { IOption } from "./interfaces/option";
 import { IProduct } from "./interfaces/product";
 
+const prodOptions = {qty: 1,total: 0} 
 export const products: IProduct[] = [
-     {name: "Airpods",category:"tech", price: 199.99, image: "assets/images/airpods.webp",qty:1,total:0},
-     {name: "Home Assistant",category:"tech", price: 39.99, image: "assets/images/assistant.webp",qty:1,total:0},
-     {name: "Backpack",category:"bags", price: 20, image: "assets/images/backpack.webp",qty:1,total:0},
-     {name: "Bike",category:"sports", price: 40, image: "assets/images/bike.webp",qty:1,total:0},
-     {name: "Retro Camera",category:"tech", price: 30, image: "assets/images/camera1.webp",qty:1,total:0},
-     {name: "Modern Camera",category:"tech", price: 149.99, image: "assets/images/camera2.webp",qty:1,total:0},
-     {name: "Off Road Car",category:"automobile", price: 500, image: "assets/images/car.webp",qty:1,total:0},
-     {name: "Computer",category:"tech", price: 499.99, image: "assets/images/computer.webp",qty:1,total:0},
-     {name: "Sunglasses",category:"accessories", price: 5, image: "assets/images/glasses.webp",qty:1,total:0},
-     {name: "Gaming Headset",category:"tech", price: 29.99, image: "assets/images/headset.webp",qty:1,total:0},
-     {name: "Orange Juice",category:"drinks", price: 2.99, image: "assets/images/juice.webp",qty:1,total:0},
-     {name: "Perfume",category:"beauty", price: 64, image: "assets/images/perfume.webp",qty:1,total:0},
-     {name: "Phone",category:"tech", price: 499.99, image: "assets/images/phone.webp",qty:1,total:0},
-     {name: "Sneakers",category:"sports", price: 80, image: "assets/images/shoe1.webp",qty:1,total:0},
-     {name: "Shoes",category:"clothings", price: 40, image: "assets/images/shoe2.webp",qty:1,total:0},
-     {name: "Shower Gel and Shampoo",category:"toiletry", price: 10, image: "assets/images/shower-gel.webp",qty:1,total:0},
-     {name: "Ceramic Vase",category:"collectibles", price: 99.99, image: "assets/images/vase.webp",qty:1,total:0},
-     {name: "Modern Watch",category:"tech", price: 399.99, image: "assets/images/watch1.webp",qty:1,total:0},
-     {name: "Classic Watch",category:"tech", price: 299.99, image: "assets/images/watch2.webp",qty:1,total:0},
-     {name: "Classic Watch",category:"tech", price: 299.99, image: "assets/images/watch3.webp",qty:1,total:0},
-     {name: "BBQ Sandwich 'Ghars'", category:"food", price: 2, image: "assets/images/ghars.webp",qty:1,total:0},
-     {name: "Supercar",category:"automobile",price:999.99,image:"assets/images/supercar.webp",qty:1,total:0},
-     {name: "Salad Caesar",category:"food",price:5,image:"assets/images/salad.webp",qty:1,total:0},
-     {name: "Water Bottle",category:"drinks",price:1.50,image:"assets/images/water.webp",qty:1,total:0}
+     {name: "Airpods",category:"tech", price: 199.99, image: "assets/images/airpods.webp",...prodOptions},
+     {name: "Home Assistant",category:"tech", price: 39.99, image: "assets/images/assistant.webp",...prodOptions},
+     {name: "Backpack",category:"bags", price: 20, image: "assets/images/backpack.webp",...prodOptions},
+     {name: "Bike",category:"sports", price: 40, image: "assets/images/bike.webp",...prodOptions},
+     {name: "Retro Camera",category:"tech", price: 30, image: "assets/images/camera1.webp",...prodOptions},
+     {name: "Modern Camera",category:"tech", price: 149.99, image: "assets/images/camera2.webp",...prodOptions},
+     {name: "Off Road Car",category:"automobile", price: 500, image: "assets/images/car.webp",...prodOptions},
+     {name: "Computer",category:"tech", price: 499.99, image: "assets/images/computer.webp",...prodOptions},
+     {name: "Sunglasses",category:"accessories", price: 5, image: "assets/images/glasses.webp",...prodOptions},
+     {name: "Gaming Headset",category:"tech", price: 29.99, image: "assets/images/headset.webp",...prodOptions},
+     {name: "Orange Juice",category:"drinks", price: 2.99, image: "assets/images/juice.webp",...prodOptions},
+     {name: "Perfume",category:"beauty", price: 64, image: "assets/images/perfume.webp",...prodOptions},
+     {name: "Phone",category:"tech", price: 499.99, image: "assets/images/phone.webp",...prodOptions},
+     {name: "Sneakers",category:"sports", price: 80, image: "assets/images/shoe1.webp",...prodOptions},
+     {name: "Shoes",category:"clothings", price: 40, image: "assets/images/shoe2.webp",...prodOptions},
+     {name: "Shower Gel and Shampoo",category:"toiletry", price: 10, image: "assets/images/shower-gel.webp",...prodOptions},
+     {name: "Ceramic Vase",category:"collectibles", price: 99.99, image: "assets/images/vase.webp",...prodOptions},
+     {name: "Modern Watch",category:"tech", price: 399.99, image: "assets/images/watch1.webp",...prodOptions},
+     {name: "Classic Watch",category:"tech", price: 299.99, image: "assets/images/watch2.webp",...prodOptions},
+     {name: "Classic Watch",category:"tech", price: 299.99, image: "assets/images/watch3.webp",...prodOptions},
+     {name: "BBQ Sandwich 'Ghars'", category:"food", price: 2, image: "assets/images/ghars.webp",...prodOptions},
+     {name: "Supercar",category:"automobile",price:999.99,image:"assets/images/supercar.webp",...prodOptions},
+     {name: "Salad Caesar",category:"food",price:5,image:"assets/images/salad.webp",...prodOptions},
+     {name: "Water Bottle",category:"drinks",price:1.50,image:"assets/images/water.webp",...prodOptions}
 ];
 export const options: IOption[] = [
      {value:"name",name:"Name (from A to Z)"},
@@ -35,8 +36,10 @@ export const options: IOption[] = [
      {value:"priceDes",name:"Price (From The Most Expensive)"},
      {value:"default",name:"Default"},
 ]
+
 const categories: string[] = ["Cars", "Baby Products", "Beauty", "Books", "Camera", "Phone", "Phone Accessories", "Electronics", "Grocery & Foods", "Health and Personal Care", "Home and Garden", "Industrial and Scientific", "Music", "DVD", "CD", "Musical instruments", "Office Products", "Outdoors", "Computers", "Pet Supplies", "Software", "Sports", "Tools & Improvement", "Toys and Games", "Video", "Blu-ray", "Video Games", "Watches", "Game Consoles", "Entertainment Collectibles", "Clothing", "Shoes", "Retro Collectibles", "Souvenirs", "Tech and Gadgets"];
 export const searchHint = `Search (e.g. ${categories[Math.floor(Math.random()*categories.length)]})`;
+
 export function compare(a:IProduct,b:IProduct,type:string="",mode:string=""){
   switch(mode){
     case "des":
