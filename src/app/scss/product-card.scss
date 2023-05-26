@@ -31,8 +31,7 @@
                }
           }
           input[type=number]{
-               padding: 5px;
-               text-align: center;
+               padding: 5px;text-align: center;
                font-size: 21px;width: 50px;
                border: 2px solid $secondary;
                color: $secondary;
@@ -45,6 +44,7 @@
                font-size: 16.5px;margin-top: 10px;
                span{padding: 0 0.25em;}
           }
+          .total{color: $tertiary;font-size: 20px;}
      }
 }
 @media (prefers-reduced-motion: reduce){.product-card .product-info .details button{transition: none;}}

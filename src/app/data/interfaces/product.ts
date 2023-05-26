@@ -4,4 +4,5 @@ export interface IProduct {
      price: number,
      image: string,
      qty: number,
+     total: number;
 }

@@ -3,7 +3,6 @@ import { Action, Selector, State, StateContext } from "@ngxs/store";
 import {IProduct} from "../data/interfaces/product";
 import { ShopActions } from "./product.actions";
 import { compare, products } from "../data/allData";
-import { stat } from "fs";
 
 export interface ShopModel{
      searchTerm: string,
@@ -36,7 +35,8 @@ export class ShopState{
                category: category,
                price: price,
                image: image,
-               qty: !qty ? 1 : qty
+               qty: !qty ? 1 : qty,
+               total: price*qty
           };
           const chosenItem = state.onCart.find((_,i)=>i===action.index);
           if(chosenItem){
@@ -47,25 +47,22 @@ export class ShopState{
                state.onCart.push(chosenProduct);
                localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
           }
-          state.totalPrice+=!qty ? price : price*qty;
-          localStorage.setItem("total", String(state.totalPrice))
           ctx.setState({...state, all: [...state.all], onCart: [...state.onCart], totalPrice: state.totalPrice})
      }
      @Action(ShopActions.ChangeQty)
      changeQty(ctx: StateContext<ShopModel>,action: ShopActions.ChangeQty):void{
           const state = ctx.getState();
           const elem = action.event.target as HTMLInputElement;
-          const {price} = state.onCart[action.index];
+          const {price, qty} = state.onCart[action.index];
           if(action.type==="current") {
                state.all[action.index].qty = elem.valueAsNumber;
           } else {
-               state.totalPrice = price*elem.valueAsNumber;
-               localStorage.setItem("total", String(state.totalPrice))
+               state.onCart[action.index].qty = elem.valueAsNumber;
+               state.onCart[action.index].total = price*qty;
+               localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
           }
-          state.onCart[action.index].qty = elem.valueAsNumber;
-          localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
           ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]});
-          ctx.patchState({totalPrice: state.totalPrice})
+          ctx.patchState({totalPrice: state.totalPrice});
      }
      @Action(ShopActions.IncreaseQty)
      increaseQty(ctx: StateContext<ShopModel>,action: ShopActions.IncreaseQty):void{
@@ -74,10 +71,9 @@ export class ShopState{
                state.all[action.index].qty>=1 ? state.all[action.index].qty++ : 1;
           } else {
                state.onCart[action.index].qty>=1 ? state.onCart[action.index].qty++ : 1;
+               state.onCart[action.index].total = state.onCart[action.index].price* state.onCart[action.index].qty;
                localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
           }
-          state.totalPrice=state.onCart[action.index].price*state.onCart[action.index].qty;
-          localStorage.setItem("total", String(state.totalPrice))
           ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]})
           ctx.patchState({totalPrice: state.totalPrice})
      }
@@ -85,26 +81,26 @@ export class ShopState{
      decreaseQty(ctx: StateContext<ShopModel>,action: ShopActions.DecreaseQty):void{
           const state = ctx.getState();
           if(action.type==="current"){
-               state.all[action.index].qty>1 ? state.all[action.index].qty-- : 1;
+               state.all[action.index].qty>1 ? state.all[action.index].qty-- : state.all[action.index].qty = 1;
           } else {
-               state.onCart[action.index].qty>1 ? state.onCart[action.index].qty-- : 1;
-               localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
+               if(state.onCart[action.index].qty>1){
+                    state.onCart[action.index].qty--;
+                    state.onCart[action.index].total = state.onCart[action.index].price* state.onCart[action.index].qty;
+               } else {
+                    state.onCart[action.index].qty = 1;
+               }
           }
-          state.totalPrice=state.onCart[action.index].price*state.onCart[action.index].qty;
-          localStorage.setItem("total", String(state.totalPrice))
           ctx.setState({...state, all: [...state.all], onCart: [...state.onCart]})
           ctx.patchState({totalPrice: state.totalPrice})
      }
      @Action(ShopActions.RemoveFromCart)
      removeFromCart(ctx: StateContext<ShopModel>,action: ShopActions.RemoveFromCart):void{
           const state = ctx.getState();
-          const {price,qty,name} = state.onCart[action.index];
+          const {name} = state.onCart[action.index];
           const perm = confirm(`Are you sure to remove ${name} from the Cart?`)
           if(perm){
-               state.totalPrice-=price*qty;
-               localStorage.setItem("total", String(state.totalPrice))
                state.onCart.splice(action.index,1);
-               localStorage.setItem("item-on-cart", JSON.stringify(state.onCart))
+               localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
           }
           ctx.setState({...state, onCart: [...state.onCart]})
           ctx.patchState({totalPrice: state.totalPrice})
