@@ -34,4 +34,7 @@ export namespace ShopActions{
           static readonly type = "[e-Shop: Clear Search]";
           constructor(public query: string){}
      }
+     export class ClearProduct{
+          static readonly type = "[e-Shop: Clear Product]";
+     }
 }

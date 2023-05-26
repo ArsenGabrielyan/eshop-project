@@ -138,4 +138,17 @@ export class ShopState{
           ctx.setState({...state,all: products.sort((a,b)=>compare(a,b))}),
           ctx.patchState({searchTerm: action.query})
      }
+     @Action(ShopActions.ClearProduct)
+     clearAll(ctx: StateContext<ShopModel>){
+          const state = ctx.getState();
+          const perm = confirm(`Are you sure to clear All products?`)
+          if(perm){
+               state.onCart.splice(0,state.onCart.length);
+               localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
+               state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
+               localStorage.setItem("total", `${state.totalPrice}`);
+          }
+          ctx.setState({...state,all: products.sort((a,b)=>compare(a,b))}),
+          ctx.patchState({totalPrice: state.totalPrice})
+     }
 }

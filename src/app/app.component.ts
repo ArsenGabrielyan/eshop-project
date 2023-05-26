@@ -59,6 +59,9 @@ export class AppComponent implements OnInit {
   removeFromCart(i:number):void{
     this.store.dispatch(new ShopActions.RemoveFromCart(i));
   }
+  clearCart(){
+    this.store.dispatch(new ShopActions.ClearProduct())
+  }
   private searchProduct():void{
     this.store.dispatch(new ShopActions.UpdateSearch(this.searchPrompt));
     this.store.dispatch(new ShopActions.ApplySearch());

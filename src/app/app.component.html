@@ -38,6 +38,7 @@
      <div class="cart-details">
           <h3>Total: {{totalPrice | currency}}</h3>
           <button class="checkout"><span class="material-symbols-outlined">shopping_cart_checkout</span> To Checkout</button>
+          <button class="clear"><span class="material-symbols-outlined" (click)="clearCart()">clear_all</span></button>
      </div>
      <div class="product-list">
           <div class="product-card" *ngFor="let prod of prodOnCart;index as i">
