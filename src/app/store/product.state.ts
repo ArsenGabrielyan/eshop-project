@@ -121,6 +121,7 @@ export class ShopState{
                case "priceDes": state.all = products.sort((a,b)=>compare(a,b,"price","des")); break;
                case "cat": state.all = products.sort((a,b)=>compare(a,b,"category")); break;
                case "catDes": state.all = products.sort((a,b)=>compare(a,b,"category","des")); break;
+               case "defaultDes": state.all = products.sort((a,b)=>compare(a,b,"","des")); break;
                default: state.all = products.sort((a,b)=>compare(a,b));
           }
           ctx.setState({...state, all: [...state.all]})
