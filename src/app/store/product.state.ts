@@ -31,7 +31,7 @@ export class ShopState{
      @Action(ShopActions.AddToCart)
      addToCart(ctx: StateContext<ShopModel>,action: ShopActions.AddToCart):void{
           const state = ctx.getState();
-          const {name, image, category, price, qty} = state.all[action.index];
+          const {name, image, category, price, qty, id} = state.all[action.index];
           const chosenProduct: IProduct = {
                name: name,
                category: category,
@@ -39,10 +39,10 @@ export class ShopState{
                image: image,
                qty: !qty ? 1 : qty,
                total: price*qty,
-               id: action.index+1
+               id: id
           };
           state.onCart.push(chosenProduct);
-          const itemOnCart = getItemById(state.onCart, chosenProduct.id);
+          const itemOnCart = getItemById(state.onCart,id);
           localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
           state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total ,0);
           localStorage.setItem("total", `${state.totalPrice}`);
