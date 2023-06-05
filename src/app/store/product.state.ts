@@ -36,7 +36,8 @@ export class ShopState{
                price: price,
                image: image,
                qty: !qty ? 1 : qty,
-               total: price*qty
+               total: price*qty,
+               id: action.index+1
           };
           state.onCart.push(chosenProduct);
           localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
