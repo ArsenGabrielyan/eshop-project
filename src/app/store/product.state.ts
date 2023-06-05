@@ -11,6 +11,8 @@ export interface ShopModel{
      totalPrice: number
 }
 
+const getItemById = (arr: IProduct[], id: number) : IProduct => arr.find(val=>val.id===id)!
+
 @State<ShopModel>({
      name: "eshop",
      defaults:{
@@ -40,6 +42,7 @@ export class ShopState{
                id: action.index+1
           };
           state.onCart.push(chosenProduct);
+          const itemOnCart = getItemById(state.onCart, chosenProduct.id);
           localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
           state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total ,0);
           localStorage.setItem("total", `${state.totalPrice}`);
