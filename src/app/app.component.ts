@@ -15,19 +15,21 @@ export class AppComponent implements OnInit {
   searchPlaceholder = searchHint;
   selectedSortOpt = "Sort By";
   searchPrompt="";alertMsg="";
-  selectedPage=localStorage.getItem("currPage") || "all";
+  selectedPage=localStorage.getItem("current") || "all";
   showAlert=false;enableClearBtn = false;
   optionList = options;totalPrice!:number;
   alertTimer!:NodeJS.Timeout;
   prodList!:IProduct[];prodOnCart!:IProduct[];
   @Select(ShopState.getAllProducts) product$!: Observable<IProduct[]>;
+
   constructor(private store: Store){}
   ngOnInit(): void {
     this.product$.pipe(map((v:any)=>this.updateState(v))).subscribe()
   }
+  
   changePage(page:string):void{
     this.selectedPage=page;
-    localStorage.setItem("currPage",page);
+    localStorage.setItem("current",page);
   }
   handleChangeOptions():void{
     this.store.dispatch(new ShopActions.ChangeOptions(this.selectedSortOpt));
@@ -59,7 +61,7 @@ export class AppComponent implements OnInit {
   removeFromCart(i:number):void{
     this.store.dispatch(new ShopActions.RemoveFromCart(i));
   }
-  clearCart(){
+  clearCart():void{
     this.store.dispatch(new ShopActions.ClearProduct())
   }
   private searchProduct():void{

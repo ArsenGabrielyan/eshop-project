@@ -11,6 +11,5 @@ $darkgrey: #666 !default;
      margin-left: 5px;border-radius: 10px;
      border: 2px solid $c1;color: $c1;
      background: none;outline: none;
-     cursor: pointer;
-     &:hover{background: $c1;color: $c2;}
+     cursor: pointer;&:hover{background: $c1;color: $c2;}
 }

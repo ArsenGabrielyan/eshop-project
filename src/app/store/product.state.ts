@@ -2,7 +2,7 @@ import {Injectable} from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import {IProduct} from "../data/interfaces/product";
 import { ShopActions } from "./product.actions";
-import { compare, products } from "../data/allData";
+import { compare, products, getItemById } from "../data/allData";
 
 export interface ShopModel{
      searchTerm: string,
@@ -10,8 +10,6 @@ export interface ShopModel{
      onCart: IProduct[],
      totalPrice: number
 }
-
-const getItemById = (arr: IProduct[], id: number) : IProduct => arr.find(val=>val.id===id)!
 
 @State<ShopModel>({
      name: "eshop",
@@ -101,8 +99,7 @@ export class ShopState{
      removeFromCart(ctx: StateContext<ShopModel>,action: ShopActions.RemoveFromCart):void{
           const state = ctx.getState();
           const {name} = state.onCart[action.index];
-          const perm = confirm(`Are you sure to remove ${name} from the Cart?`)
-          if(perm){
+          if(confirm(`Are you sure to remove ${name} from the Cart?`)){
                state.onCart.splice(action.index,1);
                localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
                state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
@@ -144,10 +141,9 @@ export class ShopState{
           ctx.patchState({searchTerm: action.query})
      }
      @Action(ShopActions.ClearProduct)
-     clearAll(ctx: StateContext<ShopModel>){
+     clearAll(ctx: StateContext<ShopModel>):void{
           const state = ctx.getState();
-          const perm = confirm(`Are you sure to clear All products?`)
-          if(perm){
+          if(confirm(`Are you sure to clear all products?`)){
                state.onCart.splice(0,state.onCart.length);
                localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
                state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
