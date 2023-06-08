@@ -4,9 +4,7 @@
 @import "./scss/header.scss";
 @import "./scss/alertbox.scss";
 .products-container{
-     min-height:100vh;display:flex;
-     @include flex-align(flex-start,center);
-     flex-direction:column;
+     min-height:100vh;display:flex;@include flex-align(flex-start,center);flex-direction:column;
      h2{
           margin:10px 0;padding-bottom:2.5px;
           font-size:32px;font-weight:300;
