@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { ShopActions } from "./product.actions";
-import { compare, products, getItemById,IProduct } from "../data/data";
+import { compare, products, getItemById,IProduct} from "../data/data";
 
 export interface ShopModel{
      searchTerm: string,
@@ -16,7 +16,7 @@ export interface ShopModel{
           searchTerm: "",
           all: products.sort((a,b)=>compare(a,b)),
           onCart: JSON.parse(localStorage.getItem("item-on-cart")!) as IProduct[] || [],
-          totalPrice:parseFloat(localStorage.getItem("total")!) || 0
+          totalPrice: parseFloat(localStorage.getItem("total")!) || 0
      }
 })
 @Injectable()
@@ -36,8 +36,15 @@ export class ShopState{
                total: price*qty,
                id: id
           };
-          state.onCart.push(chosenProduct);
           const itemOnCart = getItemById(state.onCart,id);
+          const indexOnCart = state.onCart.indexOf(itemOnCart);
+          if(indexOnCart!==-1){
+               itemOnCart.qty++;
+               itemOnCart.total = itemOnCart.price*itemOnCart.qty;
+               state.onCart[indexOnCart] = itemOnCart
+          } else{
+               state.onCart.push(chosenProduct);
+          }
           localStorage.setItem("item-on-cart", JSON.stringify(state.onCart));
           state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total ,0);
           localStorage.setItem("total", `${state.totalPrice}`);
