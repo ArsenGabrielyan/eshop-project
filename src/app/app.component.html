@@ -1,4 +1,4 @@
-<app-alertbox [msg]="alertMsg" *ngIf="showAlert"></app-alertbox>
+<div class="alertbox" *ngIf="showAlert"><span class="material-symbols-outlined">check_circle</span><p>{{alertMsg}}</p></div>
 <header class="shop-header">
      <div class="logo"><h1>e-shop</h1></div>
      <div class="search">
@@ -59,4 +59,6 @@
           </div>
      </div>
 </section>
-<app-footer></app-footer>
+<footer class="shop-footer">
+     <p>&copy; {{year}} Arsen Gabrielyan | {{"This is just a sample project" | titlecase}}</p>
+</footer>

@@ -1,15 +1,15 @@
-$primary: #0090ff !default;
-$secondary: #002a4f !default;
-$tertiary: #0779dd !default;
-$white: #fafafa !default;
-$grey: #e0e0e0 !default;
-$darkgrey: #666 !default;
-@mixin flex-align($j,$a){justify-content: $j;align-items: $a;}
-@mixin btn($c1, $c2){
-     display: flex;@include flex-align(center,center);
-     padding: 0.5em;transition: .3s;
-     margin-left: 5px;border-radius: 10px;
-     border: 2px solid $c1;color: $c1;
-     background: none;outline: none;
-     cursor: pointer;&:hover{background: $c1;color: $c2;}
+$primary:#0090ff !default;
+$secondary:#002a4f !default;
+$tertiary:#0779dd !default;
+$white:#fafafa !default;
+$grey:#e0e0e0 !default;
+$darkgrey:#666 !default;
+@mixin flex-align($j,$a){justify-content:$j;align-items:$a;}
+@mixin btn($c1,$c2){
+     display:flex;@include flex-align(center,center);
+     padding:0.5em;transition:.3s;
+     margin-left:5px;border-radius:10px;
+     border:2px solid $c1;color:$c1;
+     background:none;outline:none;
+     cursor:pointer;&:hover{background:$c1;color:$c2;}
 }

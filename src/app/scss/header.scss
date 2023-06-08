@@ -1,0 +1,20 @@
+@import "./defaults.scss";
+.shop-header{
+     padding:15px;color:$white;
+     display:flex;@include flex-align(space-between,center);
+     background:linear-gradient(-45deg,$primary,$secondary);
+     .logo h1{font-weight:300;}
+     .search{
+          width:50%;display:flex;@include flex-align(center,center);
+          input{
+               padding:0.5em 1em;border-radius:10px;
+               border:2px solid $white;
+               outline:none;background:none;
+               width:100%;color:$white;
+               font-size:16.5px;transition:.3s;
+               &::placeholder{color:$grey;}
+               &:focus{border-color:$primary;}
+          }
+     }
+     button{@include btn($white,$primary)}
+}

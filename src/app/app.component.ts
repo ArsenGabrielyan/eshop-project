@@ -18,9 +18,10 @@ export class AppComponent implements OnInit {
   showAlert=false;
   enableClearBtn = false;
   optionList = options;totalPrice!:number;
-  alertTimer!:NodeJS.Timeout;
+  alertTimer!: NodeJS.Timeout;
   prodList!:IProduct[];
   prodOnCart!:IProduct[];
+  year = new Date().getFullYear();
   @Select(ShopState.getAllProducts) product$!: Observable<IProduct[]>;
 
   constructor(private store: Store){}

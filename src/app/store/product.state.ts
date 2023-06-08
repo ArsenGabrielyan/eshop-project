@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { ShopActions } from "./product.actions";
-import { compare, products, getItemById,IProduct} from "../data/data";
+import { compare, products, getItemById, IProduct} from "../data/data";
 
 export interface ShopModel{
      searchTerm: string,
@@ -19,10 +19,12 @@ export interface ShopModel{
           totalPrice: parseFloat(localStorage.getItem("total")!) || 0
      }
 })
-@Injectable()
+@Injectable({providedIn: "root"})
 export class ShopState{
      @Selector()
-     static getAllProducts(prod: ShopState): ShopState{return prod}
+     static getAllProducts(prod: ShopState): ShopState{
+          return prod
+     }
      @Action(ShopActions.AddToCart)
      addToCart(ctx: StateContext<ShopModel>,action: ShopActions.AddToCart):void{
           const state = ctx.getState();
@@ -39,9 +41,9 @@ export class ShopState{
           const itemOnCart = getItemById(state.onCart,id);
           const indexOnCart = state.onCart.indexOf(itemOnCart);
           if(indexOnCart!==-1){
-               itemOnCart.qty++;
+               itemOnCart.qty+=itemOnCart.qty;
                itemOnCart.total = itemOnCart.price*itemOnCart.qty;
-               state.onCart[indexOnCart] = itemOnCart
+               state.onCart[indexOnCart] = itemOnCart;
           } else{
                state.onCart.push(chosenProduct);
           }

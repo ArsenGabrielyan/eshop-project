@@ -1,50 +1,32 @@
 @import "./scss/defaults.scss";
 @import "./scss/product-card.scss";
-body{position: relative;}
-.shop-header{
-     padding: 15px;color: $white;display: flex;
-     @include flex-align(space-between, center);
-     background: linear-gradient(-45deg, $primary, $secondary);
-     .logo h1{font-weight: 300;}
-     .search{
-          width: 50%;display: flex;@include flex-align(center,center);
-          input{
-               padding: 0.5em 1em;
-               border-radius: 10px;
-               border: 2px solid $white;
-               outline: none;background: none;
-               width: 100%;color: $white;
-               font-size: 16.5px;transition: .3s;
-               &::placeholder{color: $grey;}
-               &:focus{border-color: $primary;}
-          }
-     }
-     button{@include btn($white,$primary)}
-}
+@import "./scss/footer.scss";
+@import "./scss/header.scss";
+@import "./scss/alertbox.scss";
 .products-container{
-     min-height: 100vh;display: flex;
+     min-height:100vh;display:flex;
      @include flex-align(flex-start,center);
-     flex-direction: column;
+     flex-direction:column;
      h2{
-          margin: 10px 0;padding-bottom: 2.5px;
-          font-size: 32px;font-weight: 300;
-          border-bottom: 2px solid $primary;
+          margin:10px 0;padding-bottom:2.5px;
+          font-size:32px;font-weight:300;
+          border-bottom:2px solid $primary;
      }
-     .product-list{display: flex;flex-wrap: wrap;@include flex-align(center,center);}
+     .product-list{display:flex;flex-wrap:wrap;@include flex-align(center,center);}
      #sort{
-          padding: 5px;font-size: 16px;
-          color: $primary;border: 2px solid $primary;
-          background: none;outline: none;
-          border-radius: 10px;cursor: pointer;
-          option{color: $secondary;&:disabled{color: grey;}}
+          padding:5px;font-size:16px;
+          color:$primary;border:2px solid $primary;
+          background:none;outline:none;
+          border-radius:10px;cursor:pointer;
+          option{color:$secondary;&:disabled{color:grey;}}
      }
      .cart-details{
-          display: flex;@include flex-align(center,center);
-          h3{font-size: 25px;font-weight: 350;margin-right: 10px;}
-          .checkout, .clear{@include btn($secondary,$white);font-size: 16.5px;}
-          .checkout span{padding: 0 0.25em;}
+          display:flex;@include flex-align(center,center);
+          h3{font-size:25px;font-weight:350;margin-right:10px;}
+          .checkout,.clear{@include btn($secondary,$white);font-size:16.5px;}
+          .checkout span{padding:0 0.25em;}
      }
 }
-@media screen and (max-width: 500px){.shop-header .logo h1{font-size: 24px;}.search{width: 60% !important;}}
-@media screen and (max-width: 400px){.search{width: 55% !important;input{font-size: 15px !important;}}}
-@media (prefers-reduced-motion: reduce){.shop-header {.search {input{transition: none;}}button{transition: none;}}}
+@media screen and (max-width:500px){.shop-header .logo h1{font-size:24px;}.search{width:60% !important;}}
+@media screen and (max-width:400px){.search{width:55% !important;input{font-size:15px !important;}}}
+@media (prefers-reduced-motion:reduce){*{transition:none !important;}}
