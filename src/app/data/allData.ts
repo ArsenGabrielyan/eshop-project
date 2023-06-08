@@ -1,7 +1,8 @@
-import { IOption } from "./interfaces/option";
-import { IProduct } from "./interfaces/product";
+import { IOption, IProduct } from "./data";
 
 const prodOptions = {qty: 1,total: 0} 
+const categories: string[] = ["Cars", "Baby Products", "Beauty", "Books", "Camera", "Phone", "Phone Accessories", "Electronics", "Grocery & Foods", "Health and Personal Care", "Home and Garden", "Industrial and Scientific", "Music", "DVD", "CD", "Musical instruments", "Office Products", "Outdoors", "Computers", "Pet Supplies", "Software", "Sports", "Tools & Improvement", "Toys and Games", "Video", "Blu-ray", "Video Games", "Watches", "Game Consoles", "Entertainment Collectibles", "Clothing", "Shoes", "Retro Collectibles", "Souvenirs", "Tech and Gadgets"];
+
 export const products: IProduct[] = [
      {name: "Airpods",category:"tech", price: 199.99, image: "assets/images/airpods.webp",...prodOptions, id: 1},
      {name: "Home Assistant",category:"tech", price: 39.99, image: "assets/images/assistant.webp",...prodOptions, id: 2},
@@ -37,7 +38,6 @@ export const options: IOption[] = [
      {value:"default",name:"Default"},
      {value:"defaultDes",name:"Default (Descending)"},
 ]
-const categories: string[] = ["Cars", "Baby Products", "Beauty", "Books", "Camera", "Phone", "Phone Accessories", "Electronics", "Grocery & Foods", "Health and Personal Care", "Home and Garden", "Industrial and Scientific", "Music", "DVD", "CD", "Musical instruments", "Office Products", "Outdoors", "Computers", "Pet Supplies", "Software", "Sports", "Tools & Improvement", "Toys and Games", "Video", "Blu-ray", "Video Games", "Watches", "Game Consoles", "Entertainment Collectibles", "Clothing", "Shoes", "Retro Collectibles", "Souvenirs", "Tech and Gadgets"];
 export const searchHint = `Search (e.g. ${categories[Math.floor(Math.random()*categories.length)]})`;
 export function compare(a:IProduct,b:IProduct,type:string="",mode:string=""):1|-1|0{
   switch(mode){

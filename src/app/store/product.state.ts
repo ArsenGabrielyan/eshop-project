@@ -1,8 +1,7 @@
 import {Injectable} from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
-import {IProduct} from "../data/interfaces/product";
 import { ShopActions } from "./product.actions";
-import { compare, products, getItemById } from "../data/allData";
+import { compare, products, getItemById,IProduct } from "../data/data";
 
 export interface ShopModel{
      searchTerm: string,
@@ -23,9 +22,7 @@ export interface ShopModel{
 @Injectable()
 export class ShopState{
      @Selector()
-     static getAllProducts(prod: ShopState): ShopState{
-          return prod
-     }
+     static getAllProducts(prod: ShopState): ShopState{return prod}
      @Action(ShopActions.AddToCart)
      addToCart(ctx: StateContext<ShopModel>,action: ShopActions.AddToCart):void{
           const state = ctx.getState();

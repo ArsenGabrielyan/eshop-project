@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {options, searchHint} from "./data/allData";
-import { IProduct } from './data/interfaces/product';
+import {options,searchHint,IProduct} from "./data/data";
 import { Store, Select } from '@ngxs/store';
-import { ShopActions } from './store/product.actions';
-import { ShopState } from './store/product.state';
+import { ShopActions, ShopState } from './store/store';
 import { Observable, map } from 'rxjs';
 
 @Component({
@@ -14,19 +12,21 @@ import { Observable, map } from 'rxjs';
 export class AppComponent implements OnInit {
   searchPlaceholder = searchHint;
   selectedSortOpt = "Sort By";
-  searchPrompt="";alertMsg="";
+  searchPrompt="";
+  alertMsg="";
   selectedPage=localStorage.getItem("current") || "all";
-  showAlert=false;enableClearBtn = false;
+  showAlert=false;
+  enableClearBtn = false;
   optionList = options;totalPrice!:number;
   alertTimer!:NodeJS.Timeout;
-  prodList!:IProduct[];prodOnCart!:IProduct[];
+  prodList!:IProduct[];
+  prodOnCart!:IProduct[];
   @Select(ShopState.getAllProducts) product$!: Observable<IProduct[]>;
 
   constructor(private store: Store){}
   ngOnInit(): void {
     this.product$.pipe(map((v:any)=>this.updateState(v))).subscribe()
   }
-  
   changePage(page:string):void{
     this.selectedPage=page;
     localStorage.setItem("current",page);
