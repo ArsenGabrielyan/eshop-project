@@ -39,7 +39,7 @@ export class ShopState{
           const itemOnCart = getItemById(state.onCart,id);
           const indexOnCart = state.onCart.indexOf(itemOnCart);
           if(indexOnCart!==-1){
-               itemOnCart.qty+=itemOnCart.qty;
+               itemOnCart.qty++;
                itemOnCart.total = itemOnCart.price*itemOnCart.qty;
                state.onCart[indexOnCart] = itemOnCart;
           } else{

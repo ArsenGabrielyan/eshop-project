@@ -17,13 +17,13 @@ export class AppComponent implements OnInit {
   selectedPage=localStorage.getItem("current") || "all";
   showAlert=false;
   enableClearBtn = false;
-  optionList = options;totalPrice!:number;
+  optionList = options;
+  totalPrice = 0;
   alertTimer!:NodeJS.Timeout;
-  prodList!:IProduct[];
-  prodOnCart!:IProduct[];
+  prodList:IProduct[] = [];
+  prodOnCart:IProduct[] = [];
   year = new Date().getFullYear();
   @Select(ShopState.getAllProducts) product$!:Observable<IProduct[]>;
-
   constructor(private store:Store){}
   ngOnInit():void {
     this.product$.pipe(map((v:any)=>this.updateState(v))).subscribe()
