@@ -4,15 +4,15 @@ export namespace ShopActions{
           constructor(public index:number){}
      }
      export class ChangeQty{
-          static readonly type = "[e-Shop: Change Amount]";
+          static readonly type = "[e-Shop: Change Qty]";
           constructor(public index:number,public event:Event,public type:string){}
      }
      export class IncreaseQty{
-          static readonly type = "[e-Shop: Increase Amount]";
+          static readonly type = "[e-Shop: Increase Qty]";
           constructor(public index:number,public type:string){}
      }
      export class DecreaseQty{
-          static readonly type = "[e-Shop: Decrease Amount]";
+          static readonly type = "[e-Shop: Decrease Qty]";
           constructor(public index:number,public type:string){}
      }
      export class RemoveFromCart{

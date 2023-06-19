@@ -103,13 +103,10 @@ export class ShopState{
      @Action(ShopActions.RemoveFromCart)
      removeFromCart(ctx:StateContext<ShopModel>,action:ShopActions.RemoveFromCart):void{
           const state = ctx.getState();
-          const {name} = state.onCart[action.index];
-          if(confirm(`Are you sure to remove ${name} from the Cart?`)){
-               state.onCart.splice(action.index,1);
-               localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
-               state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
-               localStorage.setItem("total",`${state.totalPrice}`);
-          }
+          state.onCart.splice(action.index,1);
+          localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
+          state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
+          localStorage.setItem("total",`${state.totalPrice}`);
           ctx.setState({...state,onCart:[...state.onCart]})
           ctx.patchState({totalPrice:state.totalPrice})
      }
@@ -142,8 +139,7 @@ export class ShopState{
      @Action(ShopActions.ClearSearch)
      clearSearch(ctx:StateContext<ShopModel>,action:ShopActions.ClearSearch):void{
           const state = ctx.getState();
-          ctx.setState({...state,all:products.sort((a,b)=>compare(a,b))}),
-          ctx.patchState({searchTerm:action.query})
+          ctx.setState({...state,all:products.sort((a,b)=>compare(a,b))}),ctx.patchState({searchTerm:action.query})
      }
      @Action(ShopActions.ClearProduct)
      clearAll(ctx:StateContext<ShopModel>):void{
@@ -154,7 +150,6 @@ export class ShopState{
                state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
                localStorage.setItem("total",`${state.totalPrice}`);
           }
-          ctx.setState({...state,all:products.sort((a,b)=>compare(a,b))}),
-          ctx.patchState({totalPrice:state.totalPrice})
+          ctx.setState({...state,all:products.sort((a,b)=>compare(a,b))}),ctx.patchState({totalPrice:state.totalPrice})
      }
 }

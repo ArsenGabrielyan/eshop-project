@@ -30,26 +30,26 @@ export const products:IProduct[] = [
      {name:"Water Bottle",category:"drinks",price:1.50,image:"assets/images/water.webp",...prodOptions,id:24}
 ];
 export const options:IOption[] = [
-     {value:"name",name:"Name (from A to Z)"},
-     {value:"nameDes",name:"Name (From Z to A)"},{value:"cat",name:"Category (from A to Z)"},
-     {value:"catDes",name:"Category (From Z to A)"},
-     {value:"price",name:"Price (From Cheapest)"},
-     {value:"priceDes",name:"Price (From The Most Expensive)"},
-     {value:"default",name:"Default"},
-     {value:"defaultDes",name:"Default (Descending)"},
+    {value:"default",name:"Default"},
+    {value:"defaultDes",name:"Default (Descending)"},
+    {value:"name",name:"Name (from A to Z)"},
+    {value:"nameDes",name:"Name (From Z to A)"},
+    {value:"cat",name:"Category (from A to Z)"},
+    {value:"catDes",name:"Category (From Z to A)"},
+    {value:"price",name:"Price (From Cheapest)"},
+    {value:"priceDes",name:"Price (From The Most Expensive)"},
 ]
 export const searchHint = `Search (e.g. ${categories[Math.floor(Math.random()*categories.length)]})`;
+
 export function compare(a:IProduct,b:IProduct,type:string="",mode:string=""):1|-1|0{
   switch(mode){
-    case "des":
-    switch(type){
+    case "des": switch(type){
       case "name": return (a.name>b.name) ? -1 : (a.name<b.name) ? 1 : 0
       case "price": return (a.price>b.price) ? -1 : (a.price<b.price) ? 1 : 0
       case "category": return (a.category>b.category) ? -1 : (a.category<b.category) ? 1 : 0
       default: return (a.id>b.id) ? -1 : (a.id<b.id) ? 1 : 0
     }
-    default:
-    switch(type){
+    default: switch(type){
       case "name": return (a.name>b.name) ? 1 : (a.name<b.name) ? -1 : 0
       case "price": return (a.price>b.price) ? 1 : (a.price<b.price) ? -1 : 0
       case "category": return (a.category>b.category) ? 1 : (a.category<b.category) ? -1 : 0
