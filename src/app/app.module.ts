@@ -13,7 +13,7 @@ import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
   imports: [
     BrowserModule,
     FormsModule,
-    NgxsModule.forRoot([ShopState],{selectorOptions: { suppressErrors: true}}),
+    NgxsModule.forRoot([ShopState]),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],
   providers: [],

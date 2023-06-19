@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import {options,searchHint,IProduct} from "./data/data";
-import { Store, Select } from '@ngxs/store';
-import { ShopActions, ShopState } from './store/store';
-import { Observable, map } from 'rxjs';
+import { Store,Select } from '@ngxs/store';
+import { ShopActions,ShopState } from './store/store';
+import { Observable,map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -18,14 +18,14 @@ export class AppComponent implements OnInit {
   showAlert=false;
   enableClearBtn = false;
   optionList = options;totalPrice!:number;
-  alertTimer!: NodeJS.Timeout;
+  alertTimer!:NodeJS.Timeout;
   prodList!:IProduct[];
   prodOnCart!:IProduct[];
   year = new Date().getFullYear();
-  @Select(ShopState.getAllProducts) product$!: Observable<IProduct[]>;
+  @Select(ShopState.getAllProducts) product$!:Observable<IProduct[]>;
 
-  constructor(private store: Store){}
-  ngOnInit(): void {
+  constructor(private store:Store){}
+  ngOnInit():void {
     this.product$.pipe(map((v:any)=>this.updateState(v))).subscribe()
   }
   changePage(page:string):void{
@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new ShopActions.ChangeOptions(this.selectedSortOpt));
   }
   handleInput():void{
-    this.searchPrompt!=="" ?  this.enableClearBtn = true : this.enableClearBtn = false;
+    this.enableClearBtn = this.searchPrompt!=="";
     this.searchProduct();
   }
   clearSearch():void{
@@ -70,8 +70,7 @@ export class AppComponent implements OnInit {
     this.store.dispatch(new ShopActions.ApplySearch());
   }
   private resetAlert():void{
-    this.showAlert=false;
-    this.alertMsg = "";
+    this.showAlert=false;this.alertMsg = "";
   }
   private updateState(v:any):void{
     this.prodList = v.all;

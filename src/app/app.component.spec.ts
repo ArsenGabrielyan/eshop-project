@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
-import { NgxsModule, Store } from '@ngxs/store';
+import { NgxsModule,Store } from '@ngxs/store';
 import { ShopState } from './store/product.state';
 
-describe('AppComponent', () => {
+describe('AppComponent',() => {
   let store: Store
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -12,7 +12,7 @@ describe('AppComponent', () => {
     })
     store = TestBed.inject(Store);
   });
-  it('should create the app', () => {
+  it('should create the app',() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     store
@@ -20,7 +20,7 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
     expect(shop).toBeTruthy();
   });
-  it(`should have as title 'eshop-project'`, () => {
+  it(`should have as title 'eshop-project'`,() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
