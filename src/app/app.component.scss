@@ -25,6 +25,6 @@
           .checkout span{padding:0 0.25em;}
      }
 }
-@media screen and (max-width:500px){.shop-header .logo h1{font-size:24px;}.search{width:60%!important;;}}
-@media screen and (max-width:400px){.search{width:55%!important;;input{font-size:15px!important;;}}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;;}}
+@media screen and (max-width:500px){.shop-header .logo h1{font-size:24px;}.search{width:60%!important;}}
+@media screen and (max-width:400px){.search{width:55%!important;input{font-size:15px!important;}}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;}}
