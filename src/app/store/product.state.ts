@@ -144,12 +144,10 @@ export class ShopState{
      @Action(ShopActions.ClearProduct)
      clearAll(ctx:StateContext<ShopModel>):void{
           const state = ctx.getState();
-          if(confirm(`Are you sure to clear all products?`)){
-               state.onCart.splice(0,state.onCart.length);
-               localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
-               state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
-               localStorage.setItem("total",`${state.totalPrice}`);
-          }
+          state.onCart.splice(0,state.onCart.length);
+          localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
+          state.totalPrice=state.onCart.reduce((res,item)=>res+item.total,0);
+          localStorage.setItem("total",`${state.totalPrice}`);
           ctx.setState({...state,all:products.sort((a,b)=>compare(a,b))}),ctx.patchState({totalPrice:state.totalPrice})
      }
 }

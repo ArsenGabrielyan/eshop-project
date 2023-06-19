@@ -1,11 +1,11 @@
-$primary:#0090ff !default;
-$secondary:#002a4f !default;
-$tertiary:#0779dd !default;
-$white:#fafafa !default;
-$grey:#e0e0e0 !default;
-$darkgrey:#666 !default;
-$alert-light:#82ce81ee !default;
-$alert:#204829 !default;
+$primary:#0090ff!default;
+$secondary:#002a4f!default;
+$tertiary:#0779dd!default;
+$white:#fafafa!default;
+$grey:#e0e0e0!default;
+$darkgrey:#666!default;
+$alert-light:#82ce81ee!default;
+$alert:#204829!default;
 
 @mixin flex-align($j,$a){justify-content:$j;align-items:$a;}
 @mixin btn($c1,$c2){
