@@ -65,14 +65,14 @@ export class AppComponent implements OnInit {
   clearCart():void{
     this.store.dispatch(new ShopActions.ClearProduct())
   }
-  private searchProduct():void{
+  searchProduct():void{
     this.store.dispatch(new ShopActions.UpdateSearch(this.searchPrompt));
     this.store.dispatch(new ShopActions.ApplySearch());
   }
-  private resetAlert():void{
+  resetAlert():void{
     this.showAlert=false;this.alertMsg = "";
   }
-  private updateState(v:any):void{
+  updateState(v:any):void{
     this.prodList = v.all;
     this.prodOnCart = v.onCart;
     this.totalPrice = v.totalPrice;
