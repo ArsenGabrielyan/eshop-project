@@ -1,4 +1,3 @@
-import { AppComponent } from "../app.component";
 import { IOption,IProduct } from "./data";
 
 const prodOptions = {qty:1,total:0} 
@@ -59,11 +58,3 @@ export function compare(a:IProduct,b:IProduct,type:string="",mode:string=""):1|-
   }
 }
 export const getItemById = (arr:IProduct[],id:number):IProduct => arr.find(val=>val.id===id)!
-export function checkAllVariables(app: AppComponent){
-  const {searchPlaceholder,selectedSortOpt,optionList,year,alertTimer} = app;
-  expect(searchPlaceholder).toEqual(searchHint);
-  expect(selectedSortOpt).toBe("Sort By");
-  expect(optionList).toEqual(options);
-  expect(year).toBe(new Date().getFullYear());
-  expect(alertTimer).toBeUndefined();
-}

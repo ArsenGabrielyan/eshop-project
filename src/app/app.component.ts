@@ -12,19 +12,20 @@ import { Observable,map } from 'rxjs';
 export class AppComponent implements OnInit {
   searchPlaceholder = searchHint;
   selectedSortOpt = "Sort By";
-  searchPrompt="";
-  alertMsg="";
+  searchPrompt=""; alertMsg="";
   selectedPage=localStorage.getItem("current") || "all";
   showAlert=false;
   enableClearBtn = false;
   optionList = options;
   totalPrice = 0;
+  selectedIndex = 0;
   alertTimer!:NodeJS.Timeout;
   prodList:IProduct[] = [];
   prodOnCart:IProduct[] = [];
   year = new Date().getFullYear();
   @Select(ShopState.getAllProducts) product$!:Observable<IProduct[]>;
   constructor(private store:Store){}
+
   ngOnInit():void {
     this.product$.pipe(map((v:any)=>this.updateState(v))).subscribe()
   }
@@ -45,22 +46,26 @@ export class AppComponent implements OnInit {
   }
   addToCart(i:number):void{
     clearTimeout(this.alertTimer);
-    this.showAlert=true;
+    this.showAlert=true; this.selectedIndex = i;
     this.alertMsg = `Added ${this.prodList[i].name} to the Card`;
-    this.store.dispatch(new ShopActions.AddToCart(i));
+    this.store.dispatch(new ShopActions.AddToCart(this.selectedIndex));
     this.alertTimer = setTimeout(()=>this.resetAlert(),1500);
   };
   changeQty(i:number,e:Event,type:string=""):void{
-    this.store.dispatch(new ShopActions.ChangeQty(i,e,type));
+    this.selectedIndex = i;
+    this.store.dispatch(new ShopActions.ChangeQty(this.selectedIndex,e,type));
   }
   increaseQty(i:number,type:string=""):void{
-    this.store.dispatch(new ShopActions.IncreaseQty(i,type));
+    this.selectedIndex = i;
+    this.store.dispatch(new ShopActions.IncreaseQty(this.selectedIndex,type));
   }
   decreaseQty(i:number,type:string=""):void{
-    this.store.dispatch(new ShopActions.DecreaseQty(i,type));
+    this.selectedIndex = i;
+    this.store.dispatch(new ShopActions.DecreaseQty(this.selectedIndex,type));
   }
   removeFromCart(i:number):void{
-    this.store.dispatch(new ShopActions.RemoveFromCart(i));
+    this.selectedIndex = i;
+    this.store.dispatch(new ShopActions.RemoveFromCart(this.selectedIndex));
   }
   clearCart():void{
     this.store.dispatch(new ShopActions.ClearProduct())

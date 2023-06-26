@@ -1,12 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NgxsModule, Store } from '@ngxs/store';
-import { IProduct, checkAllVariables, compare, products } from './data/data';
-import { ShopActions, ShopModel, ShopState } from './store/store';
+import { IProduct, searchHint,options, compare, products } from './data/data';
+import { ShopActions, ShopState } from './store/store';
 import { FormsModule } from '@angular/forms';
 
+export function checkAllVariables(app: AppComponent){
+  const {searchPlaceholder,year,alertTimer,selectedIndex} = app;
+  expect(searchPlaceholder).toEqual(searchHint);
+  expect(year).toBe(new Date().getFullYear());
+  expect(alertTimer).toBeUndefined();
+  expect(selectedIndex).toBe(0);
+}
+
 describe('AppComponent',() => {
-  let app:AppComponent,fixture:ComponentFixture<AppComponent>,store:Store,shop:ShopModel;
+  let app:AppComponent,fixture:ComponentFixture<AppComponent>,store:Store,shop:any;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([ShopState]),FormsModule],
@@ -17,7 +25,7 @@ describe('AppComponent',() => {
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
     store = TestBed.inject(Store);
-    shop = store.selectSnapshot<ShopModel>(state=>state.eshop);
+    shop = store.selectSnapshot(state=>state.eshop);
     fixture.detectChanges();
   })
   it('should create the app',()=>{
@@ -37,6 +45,8 @@ describe('AppComponent',() => {
   });
   it("should call the handleChangeOptions function",()=>{
     store.dispatch(new ShopActions.ChangeOptions(app.selectedSortOpt));
+    expect(app.selectedSortOpt).toBe("Sort By");
+    expect(app.optionList).toEqual(options);
     expect(shop.all).toEqual(products.sort((a,b)=>compare(a,b)));
   });
   it("should call the clearSearch function",()=>{
@@ -57,8 +67,25 @@ describe('AppComponent',() => {
     expect(shop.searchTerm).toBe(app.searchPrompt);
   });
   it("should call the updateState function",()=>{
-    expect<number>(app.totalPrice).toEqual(0);
-    expect<IProduct[]>(app.prodList).toEqual(products)
-    expect<IProduct[]>(app.prodOnCart).toEqual([])
+    expect<number>(app.totalPrice).toEqual(shop.totalPrice);
+    expect<IProduct[]>(app.prodList).toEqual(shop.all)
+    expect<IProduct[]>(app.prodOnCart).toEqual(shop.onCart);
+  });
+  it("should call the addToCart function",()=>{
+    store.dispatch(new ShopActions.AddToCart(app.selectedIndex));
+    expect(shop.onCart[app.selectedIndex]).toEqual({...products[0], total: shop.all[0].price*shop.all[0].qty});
+    expect(shop.totalPrice).toBe(shop.all[0].price*shop.all[0].qty);
+  });
+  it("should call the increaseQty function",()=>{
+    store.dispatch(new ShopActions.IncreaseQty(app.selectedIndex,"current"));
+    expect(shop.all[app.selectedIndex].qty).toBeDefined();
+  })
+  it("should call the decreaseQty function",()=>{
+    store.dispatch(new ShopActions.DecreaseQty(app.selectedIndex,"current"));
+    expect(shop.all[app.selectedIndex].qty).toBeDefined(); 
+  })
+  it("should call the removeFromCart function",()=>{
+    store.dispatch(new ShopActions.RemoveFromCart(app.selectedIndex));
+    expect(shop.onCart[app.selectedIndex]).toBeUndefined();
   })
 });

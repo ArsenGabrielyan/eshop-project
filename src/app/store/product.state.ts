@@ -46,7 +46,7 @@ export class ShopState{
                state.onCart.push(chosenProduct);
           }
           localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
-          state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total ,0);
+          state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total,0);
           localStorage.setItem("total",`${state.totalPrice}`);
           ctx.setState({...state,all:[...state.all],onCart:[...state.onCart],totalPrice:state.totalPrice})
      }
@@ -61,7 +61,7 @@ export class ShopState{
                state.onCart[action.index].total = state.onCart[action.index].price*state.onCart[action.index].qty;
                localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
           }
-          state.totalPrice=state.onCart.reduce((res,item)=> res+item.total ,0);
+          state.totalPrice=state.onCart.reduce((res,item)=> res+item.total,0);
           localStorage.setItem("total",`${state.totalPrice}`);
           ctx.setState({...state,all:[...state.all],onCart:[...state.onCart]});
           ctx.patchState({totalPrice:state.totalPrice});
@@ -75,7 +75,7 @@ export class ShopState{
                state.onCart[action.index].qty = state.onCart[action.index].qty>=1 ? state.onCart[action.index].qty+1 : 1;
                state.onCart[action.index].total = state.onCart[action.index].price* state.onCart[action.index].qty;
                localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
-               state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total ,0);
+               state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total,0);
                localStorage.setItem("total",`${state.totalPrice}`);
           }
           ctx.setState({...state,all:[...state.all],onCart:[...state.onCart]})
@@ -91,7 +91,7 @@ export class ShopState{
                     state.onCart[action.index].qty--;
                     state.onCart[action.index].total = state.onCart[action.index].price* state.onCart[action.index].qty;
                     localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
-                    state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total ,0);
+                    state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total,0);
                     localStorage.setItem("total",`${state.totalPrice}`);
                } else {
                     state.onCart[action.index].qty = 1;
