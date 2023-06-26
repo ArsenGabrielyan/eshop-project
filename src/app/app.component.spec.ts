@@ -2,8 +2,9 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { NgxsModule, Store } from '@ngxs/store';
 import { IProduct, searchHint,options, compare, products } from './data/data';
-import { ShopActions, ShopState } from './store/store';
+import { ShopActions, ShopModel, ShopState } from './store/store';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 
 export function checkAllVariables(app: AppComponent){
   const {searchPlaceholder,year,alertTimer,selectedIndex} = app;
@@ -12,12 +13,12 @@ export function checkAllVariables(app: AppComponent){
   expect(alertTimer).toBeUndefined();
   expect(selectedIndex).toBe(0);
 }
-
 describe('AppComponent',() => {
-  let app:AppComponent,fixture:ComponentFixture<AppComponent>,store:Store,shop:any;
+  let app:AppComponent,fixture:ComponentFixture<AppComponent>,store:Store,shop:ShopModel;
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [NgxsModule.forRoot([ShopState]),FormsModule],
+      teardown: {destroyAfterEach: false},
       declarations: [AppComponent]
     }).compileComponents()
   });
@@ -87,5 +88,11 @@ describe('AppComponent',() => {
   it("should call the removeFromCart function",()=>{
     store.dispatch(new ShopActions.RemoveFromCart(app.selectedIndex));
     expect(shop.onCart[app.selectedIndex]).toBeUndefined();
+  })
+  it("should call the changeQty function",()=>{
+    const input = fixture.debugElement.query(By.css(".product-card .product-info input[type=number]"));
+    const elem = input.nativeElement as HTMLInputElement;
+    input.triggerEventHandler("change");
+    expect(elem.value).toBe("");
   })
 });
