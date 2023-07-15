@@ -11,8 +11,8 @@
           .details{
                width:100%;display:flex;@include flex-align(space-between,center);
                .txt-center{width:100%;p{text-align:center}}
-               button{@include btn($secondary,$white);font-size:16.5px;margin:0;span{padding:0 0.25em;}}
           }
+          .addBtn, .details button{@include btn($secondary,$white);font-size:16.5px;margin:0;span{padding:0 0.25em;}}
           .inputNum{
                display:flex;@include flex-align(center,center);
                margin-right:10px;.numBtn{padding:2px;margin:0 2px;border:none;span{padding:0;}}

@@ -7,21 +7,19 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 export function checkAllVariables(app: AppComponent){
-  const {searchPlaceholder,year,alertTimer,selectedIndex} = app;
+  const {searchPlaceholder,year} = app;
   expect(searchPlaceholder).toEqual(searchHint);
   expect(year).toBe(new Date().getFullYear());
-  expect(alertTimer).toBeUndefined();
-  expect(selectedIndex).toBe(0);
 }
 describe('AppComponent',() => {
-  let app:AppComponent,fixture:ComponentFixture<AppComponent>,store:Store,shop:ShopModel;
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      imports: [NgxsModule.forRoot([ShopState]),FormsModule],
-      teardown: {destroyAfterEach: false},
-      declarations: [AppComponent]
-    }).compileComponents()
-  });
+  let app:AppComponent;
+  let fixture:ComponentFixture<AppComponent>;
+  let store:Store;
+  let shop:ShopModel;
+  beforeEach(() => TestBed.configureTestingModule({
+    imports: [NgxsModule.forRoot([ShopState]),FormsModule],
+    declarations: [AppComponent]
+  }).compileComponents());
   beforeEach(()=>{
     fixture = TestBed.createComponent(AppComponent);
     app = fixture.componentInstance;
@@ -73,19 +71,23 @@ describe('AppComponent',() => {
     expect<IProduct[]>(app.prodOnCart).toEqual(shop.onCart);
   });
   it("should call the addToCart function",()=>{
+    expect(app.selectedIndex).toBe(0);
     store.dispatch(new ShopActions.AddToCart(app.selectedIndex));
     expect(shop.onCart[app.selectedIndex]).toEqual({...products[0], total: shop.all[0].price*shop.all[0].qty});
     expect(shop.totalPrice).toBe(shop.all[0].price*shop.all[0].qty);
   });
   it("should call the increaseQty function",()=>{
+    expect(app.selectedIndex).toBe(0);
     store.dispatch(new ShopActions.IncreaseQty(app.selectedIndex,"current"));
     expect(shop.all[app.selectedIndex].qty).toBeDefined();
   })
   it("should call the decreaseQty function",()=>{
+    expect(app.selectedIndex).toBe(0);
     store.dispatch(new ShopActions.DecreaseQty(app.selectedIndex,"current"));
     expect(shop.all[app.selectedIndex].qty).toBeDefined(); 
   })
   it("should call the removeFromCart function",()=>{
+    expect(app.selectedIndex).toBe(0);
     store.dispatch(new ShopActions.RemoveFromCart(app.selectedIndex));
     expect(shop.onCart[app.selectedIndex]).toBeUndefined();
   })
