@@ -8,6 +8,10 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArsenGabrielyan/eshop-project.git"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "^16.0.0",

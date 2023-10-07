@@ -42,9 +42,7 @@ export class ShopState{
                itemOnCart.qty++;
                itemOnCart.total = itemOnCart.price*itemOnCart.qty;
                state.onCart[indexOnCart] = itemOnCart;
-          } else{
-               state.onCart.push(chosenProduct);
-          }
+          } else state.onCart.push(chosenProduct);
           localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
           state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total,0);
           localStorage.setItem("total",`${state.totalPrice}`);
@@ -86,17 +84,13 @@ export class ShopState{
           const state = ctx.getState();
           if(action.type==="current"){
                state.all[action.index].qty = state.all[action.index].qty>1 ? state.all[action.index].qty-1 : 1;
-          } else {
-               if(state.onCart[action.index].qty>1){
-                    state.onCart[action.index].qty--;
-                    state.onCart[action.index].total = state.onCart[action.index].price* state.onCart[action.index].qty;
-                    localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
-                    state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total,0);
-                    localStorage.setItem("total",`${state.totalPrice}`);
-               } else {
-                    state.onCart[action.index].qty = 1;
-               }
-          }
+          } else if(state.onCart[action.index].qty>1){
+               state.onCart[action.index].qty--;
+               state.onCart[action.index].total = state.onCart[action.index].price* state.onCart[action.index].qty;
+               localStorage.setItem("item-on-cart",JSON.stringify(state.onCart));
+               state.totalPrice=state.onCart.reduce((res,item)=> res+ item.total,0);
+               localStorage.setItem("total",`${state.totalPrice}`);
+          } else state.onCart[action.index].qty = 1;
           ctx.setState({...state,all:[...state.all],onCart:[...state.onCart]})
           ctx.patchState({totalPrice:state.totalPrice})
      }
