@@ -23,7 +23,6 @@ export const products:IProduct[] = [
      {name:"Ceramic Vase",category:"collectibles",price:99.99,image:"assets/images/vase.webp",...prodOptions,id:17},
      {name:"Modern Watch",category:"tech",price:399.99,image:"assets/images/watch1.webp",...prodOptions,id:18},
      {name:"Classic Watch",category:"classic",price:299.99,image:"assets/images/watch2.webp",...prodOptions,id:19},
-     
      {name:"Salad Caesar",category:"food",price:5,image:"assets/images/salad.webp",...prodOptions,id:20},
      {name:"Water Bottle",category:"drinks",price:0.75,image:"assets/images/water.webp",...prodOptions,id:21},
 ];
