@@ -16,4 +16,4 @@ npm start
 `npm start` - Starts the Application to `http://localhost:4200/`
 
 > GitHub [@ArsenGabrielyan](https://github.com/ArsenGabrielyan) &nbsp;&middot;&nbsp;
-> [Arsen's Website](https://arsen-g.web.app)
+> [Arsen's Website](https://arsen-2005.vercel.app)
